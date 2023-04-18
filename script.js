@@ -13,6 +13,7 @@ fetch("product.json")
           
 
           item.innerHTML=`
+          <div class='item'>
           <div class="card position-relative m-4" style="width: 300px;">
           <div class="badge-overlay">
               <!-- Change Badge Position, Color, Text here-->
@@ -22,7 +23,7 @@ fetch("product.json")
               class="position-absolute top-0 start-100 translate-middle badge1  badge-danger">
               ${product.discount}
           </span>
-          <img src="${product.img}" onclick="search_prod(event,${product.id})" class="card-img-top" width="100%" height="300px>
+          <a href="product_detail.html?id=${product.id}"><img src=${product.img} class="card-img-top" width="100%" height="300px">
           <div class="card-body pt-0 px-0">
               <div class="d-flex flex-row justify-content-between p-3 mid">
                   <a class="d-flex flex-column text-muted mb-1">
@@ -52,6 +53,7 @@ fetch("product.json")
                   </p>
               </div>
           </div>
+      </div>
       </div>
           `
           items.appendChild(item);
@@ -153,11 +155,12 @@ loginForm.addEventListener("submit", function(event) {
   const storedPassword = localStorage.getItem(username);
   if (password === storedPassword) {
     alert("Login successful!");
-    modalBg.style.display="none";
   } else {
     alert("Incorrect username or password.");
   }
   loginForm.reset();
+  modalBg.style.display="none";
+
 
 
 });
@@ -276,3 +279,42 @@ async function search(event, productId) {
 
 
 
+let nav = document.querySelectorAll(".active-nav");
+
+let nav_click = document.querySelectorAll(".nav-item1");
+
+// nav[1].classList.add("active-nav1")
+
+for (let i = 0; i < nav.length; i++) {
+    nav_click[i].addEventListener("click", (e) => {
+        // Remove "active-nav1" class from all buttons
+
+        nav.forEach((item) => {
+            item.classList.remove("active");
+        });
+
+        // Add "active-nav1" class to the clicked button
+        nav[i].classList.add("active");
+
+     let content =   nav[i].getAttribute("data-category");
+      display(content);
+    });
+}
+ function display(content)
+ {
+    switch(content)
+    {
+        case "top":
+          console.log("top")
+        break;
+        case "elec":
+            console.log("elec")
+        break;
+        case "beauty":
+            console.log("beauty")
+        break;
+        case "fash":
+            console.log("fash")
+        break;
+    }
+ }
